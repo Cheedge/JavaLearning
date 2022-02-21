@@ -1,5 +1,5 @@
 package com.lqz.java;
-
+//总结：由父及子，静态先行
 public class StaticCaseTest {
 	public static void main(String[] args) {
 		Man m = new Man();
