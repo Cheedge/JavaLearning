@@ -44,36 +44,35 @@ public class TeamService {
 			throw new TeamException("车如流水马应龙");
 		}
 		//非壮士，不添加
-		if (e instanceof Warrior) {
-			throw new TeamException("四十万人齐卸甲，竟无一个是男儿");
+		if (!(e instanceof Warrior)) {
+			throw new TeamException("四十万人齐卸甲，竟无一个Warrior");
 		}
 		//已入队，休假ing，不添加 老大嫁作贾人妇
+//		System.out.println(e.getName());
 		Warrior emp = (Warrior)e;
 		if (emp.getStatus() == Status.INTEAM) {
-			throw new TeamException("早知解散後 各自有 際遇作導遊 奇就奇在 接受了 各自有路走");
+			throw new TeamException(emp.getName()+
+					": 始欲南去楚，又將西適秦。早知解散後 各自有 際遇作導遊 奇就奇在 接受了 各自有路走");
 		}else if (emp.getStatus() == Status.UNAVAILABLE) {
-			throw new TeamException("小舟从此逝，江海余生");
+			throw new TeamException(emp.getName()+": 小舟从此逝，江海余生");
 		}
 		//至多有: Commander: 1，Remedial: 1，Warrier: 4.
 		int[] numOf = aggregation();
-		if (e instanceof Commander) {
-			if(numOf[2] >=1) {
-				throw new TeamException("一将功成万骨枯");
-			}else if(numOf[1] >= 1) {
-				throw new TeamException("治病不蕲三折肱");
-			}else if(numOf[0]>=4) {
-				throw new TeamException("三個和尚沒水喝");
-			}
+//		System.out.println(numOf[0]+" "+numOf[1]+" "+numOf[2]);
+		if (e instanceof Commander && numOf[2] >= 1) {
+			throw new TeamException(emp.getName()+": 一将功成万骨枯");
+		}else if(e instanceof Remedial && numOf[1] >= 1) {
+			throw new TeamException(emp.getName()+": 治病不蕲三折肱");
+		}else if(e instanceof Warrior && numOf[0]>=4) {
+			throw new TeamException(emp.getName()+": 桐風驚心壯士苦");
 		}
 
+
 		if (emp.getStatus() == Status.FREE) {
-			team[team.length] = (Warrior) new Employee(
-					e.getId(),
-					e.getName(),
-					e.getAge(),
-					e.getHp());
-			this.total += 1;
-			counter += 1;
+			team[total++] = emp;
+			emp.setStatus(Status.INTEAM);
+			emp.setMemberId(counter++);
+//			counter += 1;
 		}else {
 			throw new TeamException("世界真奇妙");
 		}
@@ -86,15 +85,27 @@ public class TeamService {
 	 * @throws TeamException
 	 */
 	public void removeMember(int memberId) throws TeamException{
-		for (int i=0; i<team.length; i++) {
-			if (memberId != team[i].getId()) {
-				throw new TeamException("壮士，查无此人");
-			}else {
-				team[i] = team[i+1];
-				total -= 1;
-				counter -= 1;
+		int i;
+		for (i=0; i<total; i++) {
+//			System.out.println("mem:"+memberId+"i:"+i+"teamlen"+team.length);
+			if (memberId == team[i].getMemberId()) {
+				team[i].setStatus(Status.FREE);
+				break;//out of for loop
 			}
 		}
+		if(i==total) {
+			throw new TeamException("鸟啼花落人何在，竹死桐枯凤不来");
+		}
+		for (int j=i; j<total-1; j++) {
+			team[j]=team[j+1];
+			team[j].setMemberId(team[j+1].getMemberId()-1);
+		}
+		total -= 1;
+		team[total]=null;
+		counter -= 1;
+//		System.out.println(memberId+"\t"+team[i].getMemberId());
+
+		
 	}
 	/**
 	 * @Author lqz
@@ -105,11 +116,11 @@ public class TeamService {
 	public int[] aggregation() {
 		int numOfWarrior=0, numOfRemedial=0, numOfCommander=0;
 		for (int i=0; i<total; i++) {
-			if(team[i] instanceof Warrior) {
+			if(team[i] instanceof Commander) {
 				numOfWarrior++;
 			}else if (team[i] instanceof Remedial) {
 				numOfRemedial++;
-			}else if (team[i] instanceof Commander) {
+			}else if (team[i] instanceof Warrior) {
 				numOfCommander++;
 			}
 		}
@@ -117,14 +128,5 @@ public class TeamService {
 	}
 	public int getTotal() {
 		return total;
-	}
-	public void setTotal(int total) {
-		this.total = total;
-	}
-	public static int getCounter() {
-		return counter;
-	}
-	public static void setCounter(int counter) {
-		TeamService.counter = counter;
 	}
 }

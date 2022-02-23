@@ -13,9 +13,9 @@ import com.lqz.team.domain.Warrior;
 public class NameListService {
 	private Employee[] employees;
 	public NameListService() {
-//		Data data = new Data();
 		employees = new Employee[Data.EMPLOYEES.length];
 		for (int i=0; i<Data.EMPLOYEES.length; i++) {
+//			System.out.println(Integer.parseInt(Data.EMPLOYEES[i][0]));
 			switch (Integer.parseInt(Data.EMPLOYEES[i][0])) {
 			case Data.EMPLOYEE:
 				employees[i] = new Employee(
@@ -30,7 +30,7 @@ public class NameListService {
 						Data.EMPLOYEES[i][2],
 						Integer.parseInt(Data.EMPLOYEES[i][3]),
 						Double.parseDouble(Data.EMPLOYEES[i][4]),
-						chooseEquipment(i));
+						initEquipment(i));
 				break;
 			case Data.REMEDIAL:
 				employees[i] = new Remedial(
@@ -38,7 +38,7 @@ public class NameListService {
 						Data.EMPLOYEES[i][2],
 						Integer.parseInt(Data.EMPLOYEES[i][3]),
 						Double.parseDouble(Data.EMPLOYEES[i][4]),
-						chooseEquipment(i),
+						initEquipment(i),
 						Double.parseDouble(Data.EMPLOYEES[i][5])
 						);
 				break;
@@ -47,7 +47,7 @@ public class NameListService {
 						Data.EMPLOYEES[i][2],
 						Integer.parseInt(Data.EMPLOYEES[i][3]),
 						Double.parseDouble(Data.EMPLOYEES[i][4]),
-						chooseEquipment(i),
+						initEquipment(i),
 						Double.parseDouble(Data.EMPLOYEES[i][5]),
 						Double.parseDouble(Data.EMPLOYEES[i][6]));
 				break;
@@ -60,30 +60,30 @@ public class NameListService {
 	/**
 	 * @Author lqz
 	 * @Date Feb 22, 2022 12:33:54 PM
-	 * @Description choose a equipment for team member
+	 * @Description initial equipments for all members
 	 * @return Equipment
 	 */
-	private Equipment chooseEquipment(int i) {
-		// TODO Auto-generated method stub
+	private Equipment initEquipment(int i) {
 		Equipment equip = new WEAPON(Data.EQUIPMENTS[0][1], Data.EQUIPMENTS[0][2]);
 		for (int j=0; j<Data.EQUIPMENTS.length;j++) {
-//			System.out.println(Data.EQUIPMENTS[j][1]+"+"+Data.EQUIPMENTS[j][2]);
 			String belongId = Data.EQUIPMENTS[j][3];
-			if(belongId == null) return equip;
-			if(Integer.parseInt(belongId)==i) {
-				switch (Integer.parseInt(Data.EQUIPMENTS[j][0])) {
-				case 20:
-					equip = new TAO(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
-					break;
-				case 21:
-					equip = new BOOK(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
-					break;
-				case 22:
-					equip = new WEAPON(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
-					break;
-				case 23:
-					equip = new MOUNT(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
-					break;
+//			System.out.println(belongId+" and "+Data.EQUIPMENTS[j][1]+" j "+j);
+			if(belongId != null) {
+				if(Integer.parseInt(belongId)==i) {
+					switch (Integer.parseInt(Data.EQUIPMENTS[j][0])) {
+					case 20:
+						equip = new TAO(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
+						break;
+					case 21:
+						equip = new BOOK(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
+						break;
+					case 22:
+						equip = new WEAPON(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
+						break;
+					case 23:
+						equip = new MOUNT(Data.EQUIPMENTS[j][1], Data.EQUIPMENTS[j][2]);
+						break;
+						}
 					}
 				}
 			}

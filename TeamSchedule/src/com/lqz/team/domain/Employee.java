@@ -18,6 +18,12 @@ public class Employee {
 		this.hp = hp;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return id+"\t"+name+"\t"+age+"\t"+hp;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -42,6 +48,7 @@ public class Employee {
 		this.age = age;
 	}
 
+	
 	public double getHp() {
 		return hp;
 	}

@@ -14,6 +14,14 @@
 
 	a small app simulate the customer information management.
 
+	* TeamSchedule
+
+	build a team schedule for a fighting game (refer to atguigu proj3). Need to be improved:
+	1. change Equipment interface to a class. So that we can give the equipment more flexiable for operation: for different attribute, it will contribute to different skills, attack power, etc.
+	2. make a superclass for a team (or squad), so that we can build different teams (or squads).
+	3. change Warrior attribute "age" to "hp" and "hp" to "attact".
+	4. add attribute "speed", "attact", "remedial", "stratergy" to equipment.
+
 3. Leetcode (java)
 * ArrayLeetcodeEx:
 

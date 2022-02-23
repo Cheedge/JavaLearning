@@ -15,6 +15,20 @@ public class Commander extends Remedial{
 	public void setStrategy(double strategy) {
 		this.strategy = strategy;
 	}
-	
-
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.getId()+"\t"+super.getName()+"\t"+super.getAge()+"\t"+
+				getHp()+"\t\tCommander\t"+getStatus().getNAME()+
+				"\t\t"+getLogistics()+"\t"+strategy+
+				"\t"+getEquipment().getDescription();
+	}
+	@Override
+	public String getTeamString() {
+		// TODO Auto-generated method stub
+		return super.getMemberId()+"\t"+super.getName()+"\t"+super.getAge()+"\t"+
+				getHp()+"\t\tCommander\t"+getStatus().getNAME()+
+				"\t\t"+getLogistics()+"\t"+strategy+
+				"\t"+getEquipment().getDescription();
+	}
 }
