@@ -8,7 +8,8 @@
 	* day13: Polymorphism, Class Cast and Override
 	* day14: Static method and Singleton
 	* day15: Abstract, interface, final
-	* LearningThread: Thread, Runnable, Singleton realizse (Eager and Lazy init) and synchronized (Lazy init), and realize synchronized block and method
+	* LearningThread: Thread, Runnable, Singleton realizse (Eager and Lazy init) and synchronized (Lazy init), and realize synchronized block and method. Also the Produ
+    cer and Consumer pattern with wait, notifyAll.
 
 2. project
 	* CustomerInfoManager:
