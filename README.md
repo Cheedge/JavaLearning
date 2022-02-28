@@ -10,6 +10,7 @@
 	* day15: Abstract, interface, final
 	* LearningThread: Thread, Runnable, Singleton realizse (Eager and Lazy init) and synchronized (Lazy init), and realize synchronized block and method. Also the Produ
     cer and Consumer pattern with wait, notifyAll.
+	* StringDateEx: memory use for String;String, StringBuffer, StringBuilder; five problems of deal with String methods.
 
 2. project
 	* CustomerInfoManager:
